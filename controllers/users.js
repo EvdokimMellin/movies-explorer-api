@@ -60,7 +60,10 @@ function login(req, res, next) {
         return Promise.reject(new UnauthorizedError('Неправильные почта или пароль'));
       }
 
+      return Promise.reject(new UnauthorizedError(process.env.JWT_SECRET));
       const { JWT_SECRET } = process.env;
+
+
       const token = jwt.sign({ _id: enteringUser._id }, JWT_SECRET, { expiresIn: '7d' });
 
       res.cookie('jwt', token, {
