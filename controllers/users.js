@@ -45,34 +45,35 @@ function createUser(req, res, next) {
 }
 
 function login(req, res, next) {
-  let enteringUser;
+  res.send({ message: 'asdasddsa' });
+  // let enteringUser;
 
-  User.findOne({ email: req.body.email }).select('+password')
-    .then((user) => {
-      if (!user) {
-        return Promise.reject(new UnauthorizedError('Неправильные почта или пароль'));
-      }
-      enteringUser = user;
-      return bcrypt.compare(req.body.password, user.password);
-    })
-    .then((matched) => {
-      if (!matched) {
-        return Promise.reject(new UnauthorizedError('Неправильные почта или пароль'));
-      }
-      res.send({ message: 'asdasddsa' });
-      // return Promise.reject(new UnauthorizedError([process.env, process.env.JWT_SECRET]));
-      // const { JWT_SECRET } = process.env;
+  // User.findOne({ email: req.body.email }).select('+password')
+  //   .then((user) => {
+  //     if (!user) {
+  //       return Promise.reject(new UnauthorizedError('Неправильные почта или пароль'));
+  //     }
+  //     enteringUser = user;
+  //     return bcrypt.compare(req.body.password, user.password);
+  //   })
+  //   .then((matched) => {
+  //     if (!matched) {
+  //       return Promise.reject(new UnauthorizedError('Неправильные почта или пароль'));
+  //     }
+  //     res.send({ message: 'asdasddsa' });
+  //     // return Promise.reject(new UnauthorizedError([process.env, process.env.JWT_SECRET]));
+  //     // const { JWT_SECRET } = process.env;
 
-      // const token = jwt.sign({ _id: enteringUser._id }, JWT_SECRET, { expiresIn: '7d' });
+  //     // const token = jwt.sign({ _id: enteringUser._id }, JWT_SECRET, { expiresIn: '7d' });
 
-      // res.cookie('jwt', token, {
-      //   maxAge: 3600000 * 24 * 7,
-      //   httpOnly: true,
-      //   sameSite: 'None',
-      //   secure: true,
-      // }).status(200).send({ _id: enteringUser._id });
-    })
-    .catch(next);
+  //     // res.cookie('jwt', token, {
+  //     //   maxAge: 3600000 * 24 * 7,
+  //     //   httpOnly: true,
+  //     //   sameSite: 'None',
+  //     //   secure: true,
+  //     // }).status(200).send({ _id: enteringUser._id });
+  //   })
+  //   .catch(next);
 }
 
 function signOut(req, res, next) {
