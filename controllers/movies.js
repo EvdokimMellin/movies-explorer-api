@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 const Movie = require('../models/movie');
 const NotFoundError = require('../errors/NotFoundError');
 const ForbiddenError = require('../errors/ForbiddenError');
@@ -30,13 +29,14 @@ function deleteMovie(req, res, next) {
       if (movie.owner.toString() !== req.user._id) {
         return Promise.reject(new ForbiddenError('Вы не можете удалить этот фильм'));
       }
+      return movie;
     })
     .then(() => Movie.findByIdAndRemove(req.params.movieId))
     .then((movie) => {
       if (!movie) {
         return Promise.reject(new NotFoundError('Такой фильм не найден'));
       }
-      res.status(200).send({ message: 'Фильм удален' });
+      return res.status(200).send({ message: 'Фильм удален' });
     })
     .catch(next);
 }

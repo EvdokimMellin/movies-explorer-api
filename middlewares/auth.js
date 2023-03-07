@@ -1,10 +1,16 @@
-/* eslint-disable consistent-return */
 const jwt = require('jsonwebtoken');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 
 function auth(req, res, next) {
   const { cookie } = req.headers;
-  const { JWT_SECRET = 'dev-key' } = process.env;
+
+  let JWT_SECRET;
+
+  if (process.env.NODE_ENV !== 'production') {
+    JWT_SECRET = 'dev-key';
+  } else {
+    JWT_SECRET = process.env.JWT_SECRET;
+  }
 
   if (!cookie || !cookie.startsWith('jwt=')) {
     return next(new UnauthorizedError('Необходима авторизация'));
@@ -21,7 +27,7 @@ function auth(req, res, next) {
 
   req.user = payload;
 
-  next();
+  return next();
 }
 
 module.exports = auth;

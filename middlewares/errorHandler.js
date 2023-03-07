@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const BadRequestError = require('../errors/BadRequestError');
 const ConflictError = require('../errors/ConflictError');
 const InternalServerError = require('../errors/InternalServerError');
@@ -20,6 +19,8 @@ function errorHandler(err, req, res, next) {
   const error = checkError(err);
 
   res.status(error.statusCode).send({ message: error.message });
+
+  next();
 }
 
 module.exports = errorHandler;
