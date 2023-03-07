@@ -20,7 +20,7 @@ app.use(requestLogger);
 
 app.use(helmet());
 
-app.use(router);
+app.use('/', router);
 
 app.use(errorLogger);
 
