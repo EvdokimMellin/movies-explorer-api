@@ -3,6 +3,7 @@ const { celebrate, Joi } = require('celebrate');
 const {
   createMovie, getMovies, deleteMovie,
 } = require('../controllers/movies');
+const NotFoundError = require('../errors/NotFoundError');
 
 router.get('/movies', getMovies);
 router.post('/movies', celebrate({
@@ -26,8 +27,8 @@ router.delete('/movies/:movieId', celebrate({
   }),
 }), deleteMovie);
 
-// router.use((req, res, next) => {
-//   next(new NotFoundError('Такой страницы не существует'));
-// });
+router.use((req, res, next) => {
+  next(new NotFoundError('Такой страницы не существует'));
+});
 
 module.exports = router;
