@@ -59,8 +59,8 @@ function login(req, res, next) {
       if (!matched) {
         return Promise.reject(new UnauthorizedError('Неправильные почта или пароль'));
       }
-
-      return Promise.reject(new UnauthorizedError([process.env, process.env.JWT_SECRET]));
+      res.send({ message: 'asdasddsa' });
+      // return Promise.reject(new UnauthorizedError([process.env, process.env.JWT_SECRET]));
       // const { JWT_SECRET } = process.env;
 
       // const token = jwt.sign({ _id: enteringUser._id }, JWT_SECRET, { expiresIn: '7d' });
