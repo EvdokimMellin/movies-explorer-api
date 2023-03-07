@@ -68,7 +68,7 @@ function login(req, res, next) {
         httpOnly: true,
         sameSite: 'None',
         secure: true,
-      }).status(200).send({ _id: enteringUser._id });
+      }).status(200).send({ token });
     })
     .catch(next);
 }
