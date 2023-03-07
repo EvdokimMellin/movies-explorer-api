@@ -60,18 +60,17 @@ function login(req, res, next) {
         return Promise.reject(new UnauthorizedError('Неправильные почта или пароль'));
       }
 
-      return Promise.reject(new UnauthorizedError(process.env.JWT_SECRET));
-      const { JWT_SECRET } = process.env;
+      return Promise.reject(new UnauthorizedError([process.env, process.env.JWT_SECRET]));
+      // const { JWT_SECRET } = process.env;
 
+      // const token = jwt.sign({ _id: enteringUser._id }, JWT_SECRET, { expiresIn: '7d' });
 
-      const token = jwt.sign({ _id: enteringUser._id }, JWT_SECRET, { expiresIn: '7d' });
-
-      res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 7,
-        httpOnly: true,
-        sameSite: 'None',
-        secure: true,
-      }).status(200).send({ _id: enteringUser._id });
+      // res.cookie('jwt', token, {
+      //   maxAge: 3600000 * 24 * 7,
+      //   httpOnly: true,
+      //   sameSite: 'None',
+      //   secure: true,
+      // }).status(200).send({ _id: enteringUser._id });
     })
     .catch(next);
 }
