@@ -50,12 +50,18 @@ app.use(bodyParser.json());
 //   }, 0);
 // });
 
+// app.post('/signin', celebrate({
+//   body: Joi.object().keys({
+//     email: Joi.string().email().required(),
+//     password: Joi.string().required(),
+//   }),
+// }), login);
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
-}), login);
+}), (req, res, next) => { res.send({ message: 'asdasd' }); });
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().email().required(),
