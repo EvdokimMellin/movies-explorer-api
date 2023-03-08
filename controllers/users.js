@@ -58,7 +58,14 @@ function login(req, res, next) {
         return Promise.reject(new UnauthorizedError('Неправильные почта или пароль'));
       }
 
-      const { JWT_SECRET } = process.env;
+      let JWT_SECRET;
+
+      if (process.env.NODE_ENV !== 'production') {
+        JWT_SECRET = 'dev-key';
+      } else {
+        JWT_SECRET = process.env.JWT_SECRET;
+      }
+
       const token = jwt.sign({ _id: enteringUser._id }, JWT_SECRET, { expiresIn: '7d' });
 
       return res.cookie('jwt', token, {
