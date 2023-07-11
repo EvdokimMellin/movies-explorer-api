@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-// const helmet = require('helmet');
+const helmet = require('helmet');
 
 const app = express();
 
@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 
 app.use(requestLogger);
 
-// app.use(helmet());
+app.use(helmet());
 
 app.use('/', router);
 
