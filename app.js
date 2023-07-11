@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 
 const app = express();
 
@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 
 const allowedCors = [
   'http://localhost:3000',
-  'http://api.movies-explorer-em.nomoredomains.work',
-  'https://api.movies-explorer-em.nomoredomains.work',
+  'http://movies-explorer-em.nomoredomains.work',
+  'https://movies-explorer-em.nomoredomains.work',
 ];
 
 app.use((req, res, next) => {
@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 
 app.use(requestLogger);
 
-app.use(helmet());
+// app.use(helmet());
 
 app.use('/', router);
 
