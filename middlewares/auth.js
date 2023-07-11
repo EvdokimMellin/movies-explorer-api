@@ -13,7 +13,7 @@ function auth(req, res, next) {
   }
 
   if (!cookie || !cookie.startsWith('jwt=')) {
-    return next(new UnauthorizedError('Необходима авторизация 1'));
+    return next(new UnauthorizedError('Необходима авторизация'));
   }
 
   const token = cookie.replace('jwt=', '');
@@ -22,7 +22,7 @@ function auth(req, res, next) {
   try {
     payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
-    return next(new UnauthorizedError('Необходима авторизация 2'));
+    return next(new UnauthorizedError('Необходима авторизация'));
   }
 
   req.user = payload;
