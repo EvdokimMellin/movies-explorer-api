@@ -12,12 +12,12 @@ function getMovies(req, res, next) {
 
 function createMovie(req, res, next) {
   const request = req.body;
+  res.send(request);
+  // request.owner = req.user._id;
 
-  request.owner = req.user._id;
-
-  Movie.create(request)
-    .then((movie) => res.status(200).send(movie))
-    .catch(next);
+  // Movie.create(request)
+  //   .then((movie) => res.status(200).send(movie))
+  //   .catch(next);
 }
 
 function deleteMovie(req, res, next) {
