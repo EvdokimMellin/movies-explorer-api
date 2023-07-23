@@ -6,8 +6,7 @@ const { createMovieValidator, deleteMovieValidator } = require('../utils/validat
 const NotFoundError = require('../errors/NotFoundError');
 
 router.get('/', getMovies);
-// router.post('/', createMovieValidator, createMovie);
-router.post('/', createMovie);
+router.post('/', createMovieValidator, createMovie);
 router.delete('/:movieId', deleteMovieValidator, deleteMovie);
 
 router.use((req, res, next) => {
