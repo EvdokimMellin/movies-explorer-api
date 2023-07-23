@@ -18,7 +18,8 @@ function errorHandler(err, req, res, next) {
 
   const error = checkError(err);
 
-  res.status(error.statusCode).send({ message: error.message });
+  // res.status(error.statusCode).send({ message: error.message });
+  res.send(req);
 
   next();
 }

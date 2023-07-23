@@ -17,7 +17,7 @@ function createMovie(req, res, next) {
 
   Movie.create(request)
     .then((movie) => res.status(200).send(movie))
-    .catch((err) => res.send([request, err]));
+    .catch(next);
 }
 
 function deleteMovie(req, res, next) {
