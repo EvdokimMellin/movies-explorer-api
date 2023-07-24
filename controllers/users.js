@@ -79,7 +79,7 @@ function login(req, res, next) {
 }
 
 function signOut(req, res, next) {
-  res.clearCookie('jwt', { sameSite: 'none' }).status(200).send({ message: 'Вы вышли' })
+  res.clearCookie('jwt', { sameSite: 'none', secure: true }).status(200).send({ message: 'Вы вышли' })
     .catch(next);
 }
 
